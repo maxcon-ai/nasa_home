@@ -82,7 +82,21 @@
             color: var(--primary-green);
             background-color: rgba(255,255,255,0.1);
         }
-
+        .nav-view-all-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(45deg, var(--primary-green), var(--medium-green));
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(92, 171, 125, 0.4);
+        }
+        
+        .nav-view-all-button:hover {
+            box-shadow: 0 8px 25px rgba(92, 171, 125, 0.6);
+        }
         /* Hero Section with Video Background */
         .hero {
             position: relative;
@@ -356,7 +370,7 @@
         }
         
         .tutorial-image {
-            height: 800px;
+            height: 600px;
             overflow: hidden;
             position: relative;
         }
@@ -712,6 +726,64 @@
                 font-size: 2.2rem;
             }
         }
+
+        /* Tutorials Section with Animated Image */
+        .tutorials-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tutorials-image {
+            position: absolute;
+            left: -200px;
+            bottom: 30px;
+            z-index: 5;
+            transition: all 1s ease-out;
+            opacity: 0;
+            width: 150px;
+            height: auto;
+        }
+
+        .tutorials-image.visible {
+            left: 50px;
+            opacity: 1;
+        }
+
+        .image-speech-bubble {
+            position: absolute;
+            bottom: 300px;
+            left: 80px;
+            background: white;
+            padding: 15px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 180px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease 0.5s;
+        }
+
+        .image-speech-bubble:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 20px;
+            border-width: 10px 10px 0;
+            border-style: solid;
+            border-color: white transparent;
+        }
+
+        .tutorials-image.visible .image-speech-bubble {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .image-speech-bubble p {
+            margin: 0;
+            color: var(--dark-green);
+            font-weight: 500;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -726,7 +798,7 @@
                 <li><a href="#tutorials">Tutorials</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#play">Media</a></li>
-                <li><a href="#tutorials"" class="view-all-button">Play</a></li>
+                <li><a href="#tutorials"" class="nav-view-all-button">Play</a></li>
             </ul>
         </div>
     </nav>
@@ -788,8 +860,15 @@
                 <h2>Farming Tutorials & Techniques</h2>
                 <p>Learn sustainable farming methods and advanced agricultural strategies with our educational resources</p>
             </div>
-            
+            <!-- Animated Image with Speech Bubble -->
+            <div class="tutorials-image" id="tutorials-image">
+                <img src="bukket_girl.png" alt="Friendly Assistant" style="width: 100%; height: auto; border-radius: 50%;">
+                <div class="image-speech-bubble">
+                    <p>Want to Know something new about farming? Then click play button</p>
+                </div>
+            </div>
             <div class="tutorials-grid">
+
                 <div class="tutorial-card">
                     <div class="tutorial-image">
                         <img src="game.png" alt="Crop Rotation Techniques">
@@ -1030,6 +1109,38 @@
     </footer>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const tutorialsSection = document.getElementById('tutorials');
+        const imageElement = document.getElementById('tutorials-image');
+        let imageShown = false;
+        
+        // Function to show the image
+        function showImage() {
+            if (!imageShown) {
+                imageElement.classList.add('visible');
+                imageShown = true;
+            }
+        }
+        
+        // Use Intersection Observer to detect when section is in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !imageShown) {
+                    // Wait a moment before showing the image
+                    setTimeout(showImage, 500);
+                }
+            });
+        }, { threshold: 0.3 });
+        
+        observer.observe(tutorialsSection);
+        
+        // Also show image on hover
+        tutorialsSection.addEventListener('mouseenter', function() {
+            if (!imageShown) {
+                showImage();
+            }
+        });
+    });
         function playVideo() {
             alert('Video player would launch here in a real implementation!');
         }
