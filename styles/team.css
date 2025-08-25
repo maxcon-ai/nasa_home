@@ -115,3 +115,57 @@
         grid-template-columns: 1fr;
     }
 }
+
+
+/* Team Section Responsive Styles */
+@media (max-width: 992px) {
+    .team-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    
+    .team-image {
+        height: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    .team-section {
+        padding: 3rem 0;
+    }
+    
+    .team-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .team-image {
+        height: 300px;
+    }
+    
+    .team-content {
+        padding: 1.2rem;
+    }
+    
+    .team-content h3 {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .team-image {
+        height: 250px;
+    }
+    
+    .team-content h3 {
+        font-size: 1.2rem;
+    }
+    
+    .team-desc {
+        font-size: 0.9rem;
+    }
+    
+    .team-social a {
+        width: 35px;
+        height: 35px;
+    }
+}

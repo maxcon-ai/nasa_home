@@ -192,3 +192,84 @@
     font-weight: 500;
     text-align: center;
 }
+
+/* Tutorials Section Responsive Styles */
+@media (max-width: 992px) {
+    .tutorials-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    
+    .tutorial-image {
+        height: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .tutorials-section {
+        padding: 3rem 0;
+    }
+    
+    .tutorials-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .tutorial-image {
+        height: 350px;
+    }
+    
+    .tutorial-content {
+        padding: 1.2rem;
+    }
+    
+    .tutorial-content h3 {
+        font-size: 1.3rem;
+    }
+    
+    .view-all-button {
+        padding: 0.8rem 2rem;
+        font-size: 0.9rem;
+    }
+    
+    /* Adjust character position for mobile */
+    .tutorials-image {
+        width: 120px;
+        bottom: 20px;
+    }
+    
+    .tutorials-image.visible {
+        left: 20px;
+    }
+    
+    .image-speech-bubble {
+        bottom: 250px;
+        left: 60px;
+        width: 160px;
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .tutorial-image {
+        height: 300px;
+    }
+    
+    .tutorial-content h3 {
+        font-size: 1.2rem;
+    }
+    
+    .tutorial-content p {
+        font-size: 0.9rem;
+    }
+    
+    .view-tutorial {
+        padding: 0.5rem 1.2rem;
+        font-size: 0.9rem;
+    }
+    
+    /* Hide character on very small screens */
+    .tutorials-image {
+        display: none;
+    }
+}
